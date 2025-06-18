@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Task = sequelize.define('Task', {
+const Task = sequelize.define('tasks', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -38,17 +38,6 @@ const Task = sequelize.define('Task', {
     }
 }, {
     timestamps: true, // This will add createdAt and updatedAt fields
-    indexes: [
-        {
-            fields: ['status']
-        },
-        {
-            fields: ['priority']
-        },
-        {
-            fields: ['dueDate']
-        }
-    ]
 });
 
 module.exports = Task;

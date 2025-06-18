@@ -4,8 +4,10 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser'); 
 const sequelize = require('./config/db');
 
+// Import associations BEFORE connecting to database
+require('./models/associations');
 // import routes
-// const authRoutes = require('./routes/authRoutes'); 
+ const authRoutes = require('./routes/authRoutes'); 
  const tasksRoutes = require('./routes/tasksRoutes'); 
 
 const app = express();
@@ -13,7 +15,7 @@ const app = express();
 // Connect to database
 const connectDB = async () => {
   try {
-    await sequelize.sync();
+    await sequelize.sync({ force: true });
     console.log('Database connected successfully');
   } catch (err) {
     console.error('Database connection error:', err);
@@ -36,7 +38,7 @@ app.get('/', (req, res) => {
 });
 
 // Routes will be uncommented once we create them
-// app.use('/api/v0/auth', authRoutes);
+ app.use('/api/v0/auth', authRoutes);
  app.use('/api/v0/tasks', tasksRoutes);
 
 const PORT = process.env.PORT || 3000;
