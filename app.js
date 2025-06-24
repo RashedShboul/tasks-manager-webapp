@@ -26,7 +26,7 @@ const connectDB = async () => {
 // Initialize database connection
 connectDB();
 
-app.use(morgan('short')); 
+app.use(morgan('combined')); 
 
 app.use(express.static('public')); // This line serves static files (like HTML, CSS, images) from a directory named 'public'.
 app.use(express.json()); 
